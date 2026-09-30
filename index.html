@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#06100c" />
+  <title>Misión Especial // 16.05.2024</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="scanlines"></div>
+
+  <!-- 1. ACCESO -->
+  <section id="lockScreen" class="screen active">
+    <div class="hud-card intro-card">
+      <p class="eyebrow">TRANSMISIÓN PRIVADA DETECTADA</p>
+      <h1>ARCHIVO 160524</h1>
+      <p class="system-text">Introduce la fecha que inició nuestra campaña.</p>
+
+      <div class="scanner"><span></span></div>
+      <div class="code-display" id="codeDisplay">••••••</div>
+
+      <div class="keypad">
+        <button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button>
+        <button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button>
+        <button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button>
+        <button data-key="clear">C</button><button data-key="0">0</button><button data-key="ok">✓</button>
+      </div>
+
+      <p id="lockMessage" class="micro">Pista: DDMMYY</p>
+    </div>
+  </section>
+
+  <!-- 2. INTRO -->
+  <section id="intro" class="screen">
+    <div class="hud-card intro-card">
+      <p class="eyebrow">SISTEMA DESBLOQUEADO</p>
+      <h1>MISIÓN ESPECIAL</h1>
+      <p class="date">30.09.2026</p>
+
+      <div class="scanner"><span></span></div>
+
+      <p class="system-text">
+        Destinatario identificado.<br>
+        Nivel de prioridad: <strong>MÁXIMO</strong>
+      </p>
+
+      <button id="startMissionBtn" class="primary-btn">INICIAR MISIÓN</button>
+      <button id="openMenuBtn" class="secondary-btn">ABRIR PANEL DE MISIONES</button>
+      <p class="micro">Recomendación: explorar todo. Hay archivos ocultos.</p>
+    </div>
+  </section>
+
+  <!-- 3. MISIÓN PRINCIPAL -->
+  <section id="mission" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">MISIÓN // 30 DE SEPTIEMBRE</p>
+      <h2>OBJETIVO</h2>
+
+      <div class="typebox">
+        <p id="typedText"></p>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="profile">CONTINUAR</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 4. PERFIL -->
+  <section id="profile" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">EXPEDIENTE CLASIFICADO</p>
+      <h2>ARCHIVO DEL SPARTAN</h2>
+
+      <div class="profile-grid">
+        <div class="avatar-ring">
+          <div class="helmet">◢</div>
+          <span>UNIDAD 01</span>
+        </div>
+        <div class="data-list">
+          <div><span>Nombre</span><strong id="personName">PABLO RICARDO MUÑOZ CASTILLO</strong></div>
+          <div><span>Clasificación</span><strong>ÚNICO // EDICIÓN 1 DE 1</strong></div>
+          <div><span>Nivel de importancia</span><strong>MÁXIMO</strong></div>
+          <div><span>Estado</span><strong>INSUSTITUIBLE</strong></div>
+          <div><span>Habilidad especial</span><strong>HACERME FELIZ SIN INTENTARLO</strong></div>
+          <div><span>Debilidad conocida</span><strong id="weakness"></strong></div>
+        </div>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="counter">VER TIEMPO DE CAMPAÑA</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 5. CONTADOR -->
+  <section id="counter" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">CAMPAÑA INICIADA // 16.05.2024</p>
+      <h2>TIEMPO JUNTOS</h2>
+
+      <div class="counter-grid">
+        <div><strong id="years">0</strong><span>AÑOS</span></div>
+        <div><strong id="months">0</strong><span>MESES</span></div>
+        <div><strong id="days">0</strong><span>DÍAS</span></div>
+        <div><strong id="hours">0</strong><span>HORAS</span></div>
+        <div><strong id="minutes">0</strong><span>MIN</span></div>
+        <div><strong id="seconds">0</strong><span>SEG</span></div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label"><span>CAMPAÑA ACTUAL</span><span>EN PROGRESO ∞</span></div>
+        <div class="progress"><span></span></div>
+      </div>
+
+      <p class="note">No tiene meta final. Solo quiero seguir sumando tiempo contigo. 💚</p>
+
+      <button class="primary-btn next-linear" data-next="countdowns">VER PRÓXIMOS EVENTOS</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 6. CUENTAS REGRESIVAS -->
+  <section id="countdowns" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">PRÓXIMOS EVENTOS</p>
+      <h2>CUENTAS REGRESIVAS</h2>
+
+      <div class="countdown-cards">
+        <article class="countdown-card">
+          <span class="event-tag">EVENTO 01</span>
+          <h3>CUMPLEAÑOS DE PABLO 🎂</h3>
+          <div class="big-count" id="birthdayCountdown">--</div>
+          <p>Falta menos para celebrar otro año de tu vida, Pablo. Y sí: incluso cuando falta mucho, siempre termino pensando en ti. 💚</p>
+        </article>
+
+        <article class="countdown-card">
+          <span class="event-tag">EVENTO 02</span>
+          <h3>NUESTRO ANIVERSARIO 💚</h3>
+          <div class="big-count" id="anniversaryCountdown">--</div>
+          <p>Cada día nos acerca a otro 16 de mayo. Pero la verdad es que no necesito que sea aniversario para pensar en ti.</p>
+        </article>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="memories">ABRIR RECUERDOS</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 7. RECUERDOS -->
+  <section id="memories" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">ARCHIVO SIN FOTOGRAFÍAS</p>
+      <h2>REGISTRO DE RECUERDOS</h2>
+
+      <div class="no-photo">
+        <span>⚠</span>
+        <p>No hay evidencia fotográfica disponible.<br>Los sujetos estaban demasiado ocupados viviendo el momento.</p>
+      </div>
+
+      <div class="memory-list">
+        <article><span>01</span><p>Las conversaciones contigo que empiezan de cualquier forma y terminan convirtiéndose en momentos que quiero guardar.</p></article>
+        <article><span>02</span><p>Las veces que salimos y se nos olvida tomar fotos porque estamos demasiado ocupados estando juntos.</p></article>
+        <article><span>03</span><p>Esos días aparentemente normales que, por estar contigo, terminan sintiéndose especiales.</p></article>
+        <article><span>04</span><p>Todas esas veces que me haces reír sin siquiera darte cuenta.</p></article>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="achievements">VER LOGROS</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 8. LOGROS -->
+  <section id="achievements" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">LOGROS DESBLOQUEADOS</p>
+      <h2>PERFIL DE CAMPAÑA</h2>
+
+      <div class="achievement-grid">
+        <article><span>🏆</span><h3>MI SPARTAN FAVORITO</h3><p>Desbloqueado permanentemente.</p></article>
+        <article><span>✨</span><h3>EXPERTO EN HACERME REÍR</h3><p>Rareza: legendaria.</p></article>
+        <article><span>💚</span><h3>PABLO // PRIORIDAD MÁXIMA</h3><p>Nivel máximo alcanzado.</p></article>
+        <article><span>🎮</span><h3>SPARTAN PABLO</h3><p>Estado: activo.</p></article>
+        <article><span>📸</span><h3>VIVIR EL MOMENTO</h3><p>0 fotos, 100% recuerdos.</p></article>
+        <article><span>∞</span><h3>CAMPAÑA SIN FINAL</h3><p>Seguimos jugando.</p></article>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="reasons">DESBLOQUEAR ARCHIVOS</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 9. RAZONES -->
+  <section id="reasons" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">ARCHIVOS CIFRADOS</p>
+      <h2>RAZONES POR LAS QUE TE QUIERO</h2>
+      <p class="instruction">Toca cada archivo para desbloquearlo.</p>
+
+      <div class="reason-grid">
+        <button class="reason-card" data-text="Porque contigo puedo ser yo misma y sentirme tranquila.">ARCHIVO 01</button>
+        <button class="reason-card" data-text="Porque haces especiales hasta los días que parecían completamente normales.">ARCHIVO 02</button>
+        <button class="reason-card" data-text="Porque me gusta compartir contigo hasta las cosas más pequeñas y simples.">ARCHIVO 03</button>
+        <button class="reason-card" data-text="Porque nuestros recuerdos no necesitan fotos para saber que fueron importantes.">ARCHIVO 04</button>
+        <button class="reason-card" data-text="Porque contigo siento esa comodidad que no encuentro con cualquiera.">ARCHIVO 05</button>
+        <button class="reason-card" data-text="Porque incluso cuando no estás conmigo, cualquier cosa puede terminar haciéndome pensar en ti.">ARCHIVO 06</button>
+      </div>
+
+      <div id="reasonMessage" class="reason-message">ARCHIVO BLOQUEADO</div>
+
+      <button class="primary-btn next-linear" data-next="missyou">ACTIVAR PROTOCOLO PERSONAL</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 10. EXTRAÑARME -->
+  <section id="missyou" class="screen">
+    <div class="hud-card center">
+      <p class="eyebrow">PROTOCOLO DE EMERGENCIA</p>
+      <h2>SI ME EXTRAÑAS</h2>
+      <p class="system-text">Presiona el botón solo en caso de necesitar una dosis de cariño.</p>
+
+      <button id="missYouBtn" class="primary-btn big">MI NIÑO, PRESIONA SI ME EXTRAÑAS</button>
+      <div id="missYouMessage" class="emergency-message">Esperando señal...</div>
+
+      <button class="primary-btn next-linear" data-next="future">VER MISIONES FUTURAS</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 11. FUTURO -->
+  <section id="future" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">PLANIFICACIÓN DE CAMPAÑA</p>
+      <h2>MISIONES FUTURAS</h2>
+
+      <div class="future-list">
+        <label><input type="checkbox"> Tener una cita tranquila contigo, sin prisas y sin preocuparnos por nada más.</label>
+        <label><input type="checkbox"> Ver algo juntos, aunque terminemos comentándolo más de lo que lo vemos.</label>
+        <label><input type="checkbox"> Comer algo rico juntos y olvidarnos del teléfono por un rato.</label>
+        <label><input type="checkbox"> Crear otro recuerdo bonito que probablemente se nos vuelva a olvidar fotografiar.</label>
+        <label><input type="checkbox"> Entregarte oficialmente ese Hot Wheels que quedó pendiente. 🚗</label>
+        <label><input type="checkbox"> Seguir acumulando momentos contigo, campaña tras campaña. ∞</label>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="terminal">ABRIR TERMINAL</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 12. TERMINAL -->
+  <section id="terminal" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">CONSOLA DE SISTEMA</p>
+      <h2>TERMINAL</h2>
+
+      <div class="terminal">
+        <div id="terminalOutput">
+          <p>> sistema iniciado</p>
+          <p>> archivo 160524 montado</p>
+          <p>> esperando comando...</p>
+        </div>
+      </div>
+
+      <div class="terminal-buttons">
+        <button data-command="buscar">buscar_persona_favorita</button>
+        <button data-command="compatibilidad">calcular_compatibilidad</button>
+        <button data-command="pensamiento">verificar_si_piensa_en_ti</button>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="mapSection">ABRIR MAPA</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 13. MAPA -->
+  <section id="mapSection" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">MAPA DE COORDENADAS</p>
+      <h2>DOS PUNTOS, UNA RUTA</h2>
+
+      <div class="map-box">
+        <svg class="map-connection" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="21" y1="67" x2="79" y2="29"></line>
+        </svg>
+
+        <div class="map-point point-a"><span></span><b>MI CASA</b></div>
+        <div class="map-point point-b"><span></span><b>TU CASA</b></div>
+
+        <div class="map-center-text">
+          DISTANCIA: IRRELEVANTE<br>
+          CONEXIÓN: ACTIVA
+        </div>
+      </div>
+
+      <button class="primary-btn next-linear" data-next="game">INICIAR MINI JUEGO</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 14. JUEGO -->
+  <section id="game" class="screen">
+    <div class="hud-card wide center">
+      <p class="eyebrow">SIMULACIÓN DE COMBATE</p>
+      <h2>MINI JUEGO</h2>
+      <p class="system-text">Sobrevive 15 segundos. Usa ← → o toca los botones.</p>
+
+      <canvas id="gameCanvas" width="700" height="320"></canvas>
+
+      <div class="game-controls">
+        <button id="leftBtn">◀</button>
+        <button id="startGameBtn">INICIAR</button>
+        <button id="rightBtn">▶</button>
+      </div>
+
+      <p id="gameStatus" class="note">Estado: esperando misión.</p>
+
+      <button class="primary-btn next-linear" data-next="final">FINALIZAR MISIÓN</button>
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+    </div>
+  </section>
+
+  <!-- 15. FINAL -->
+  <section id="final" class="screen">
+    <div class="hud-card final-card">
+      <p class="eyebrow">MISIÓN COMPLETADA</p>
+      <h2>PARA TI 💚</h2>
+
+      <div class="letter">
+        <p>Mi Amor, hoy se supone que debía regalarte un Hot Wheels...</p>
+
+        <p>
+          Y aunque esta vez no pude comprarte uno, no quería que el día pasara sin darte algo.
+          Entonces pensé: si no puedo comprarte un detalle, puedo hacerte uno.
+        </p>
+
+        <p>
+          Así nació esta misión.
+        </p>
+
+        <p>
+          Quise mezclar un poquito de las cosas que te gustan —Halo, los Hot Wheels y esa vibra de
+          videojuego que tanto disfrutas— con algo que sí pudiera hacer completamente yo para ti.
+        </p>
+
+        <p>
+          No tenemos un montón de fotos juntos, pero eso no significa que nos falten recuerdos.
+          Creo que simplemente somos de esos que se concentran más en estar ahí que en sacar el celular.
+          Y la verdad, me gusta que sea así.
+        </p>
+
+        <p>
+          Me gusta pensar en todas esas conversaciones, salidas, risas y momentos pequeños que quizá
+          para alguien más no significarían nada, pero que para mí sí importan porque fueron contigo.
+        </p>
+
+        <p>
+          Y por si no quedó suficientemente claro después de recorrer toda esta página:
+          sí, Amor, pienso mucho en ti. Incluso en días normales, incluso cuando no estamos juntos,
+          incluso cuando cualquier cosa termina recordándome a ti.
+        </p>
+
+        <p>
+          Gracias por ser tú, por todos los momentos que hemos vivido desde aquel 16 de mayo de 2024
+          y por seguir siendo mi compañero de campaña.
+        </p>
+
+        <p class="signature">
+          Con muchísimo cariño y amor para<br>
+          <strong>Pablo Ricardo Muñoz Castillo 💚</strong><br><br>
+          Te amo muchísimo.
+        </p>
+      </div>
+
+      <button id="heartBtn" class="primary-btn big">ACTIVAR PROTOCOLO ❤️</button>
+      <button id="secretTrigger" class="secret-trigger" aria-label="secreto">◈</button>
+      <p class="micro">Algunos archivos requieren insistencia...</p>
+
+      <button class="secondary-btn open-menu">PANEL DE MISIONES</button>
+      <button id="restartBtn" class="secondary-btn">REINICIAR TRANSMISIÓN</button>
+    </div>
+  </section>
+
+  <!-- PANEL -->
+  <section id="menu" class="screen">
+    <div class="hud-card wide">
+      <p class="eyebrow">PANEL DE MISIONES</p>
+      <h2>SELECCIONA UN ARCHIVO</h2>
+
+      <div class="menu-grid">
+        <button data-target="mission">01 · OBJETIVO</button>
+        <button data-target="profile">02 · ARCHIVO SPARTAN</button>
+        <button data-target="counter">03 · TIEMPO JUNTOS</button>
+        <button data-target="countdowns">04 · CUENTAS REGRESIVAS</button>
+        <button data-target="memories">05 · RECUERDOS</button>
+        <button data-target="achievements">06 · LOGROS</button>
+        <button data-target="reasons">07 · RAZONES</button>
+        <button data-target="missyou">08 · SI ME EXTRAÑAS</button>
+        <button data-target="future">09 · MISIONES FUTURAS</button>
+        <button data-target="terminal">10 · TERMINAL</button>
+        <button data-target="mapSection">11 · MAPA</button>
+        <button data-target="game">12 · MINI JUEGO</button>
+        <button data-target="final">13 · MENSAJE FINAL</button>
+      </div>
+
+      <button class="secondary-btn" id="returnIntroBtn">VOLVER AL INICIO</button>
+    </div>
+  </section>
+
+  <!-- MODAL SECRETO -->
+  <div id="secretModal" class="modal hidden">
+    <div class="modal-card">
+      <p class="eyebrow">FINAL SECRETO DESBLOQUEADO</p>
+      <h3>ARCHIVO OCULTO</h3>
+      <p id="secretText"></p>
+      <button id="closeSecret" class="primary-btn">CERRAR</button>
+    </div>
+  </div>
+
+  <div id="heartsLayer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

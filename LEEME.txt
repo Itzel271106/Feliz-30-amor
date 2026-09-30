@@ -1,0 +1,39 @@
+MISIÓN ESPECIAL - VERSIÓN COMBINADA
+
+Esta versión mezcla:
+- la narrativa lineal de la V1
+- el menú y funciones avanzadas de la V2
+
+CLAVE:
+160524
+
+RECORRIDO:
+1. Acceso con clave
+2. Introducción
+3. Misión principal
+4. Archivo Spartan
+5. Tiempo juntos
+6. Cuentas regresivas
+7. Recuerdos
+8. Logros
+9. Razones
+10. Si me extrañas
+11. Misiones futuras
+12. Terminal
+13. Mapa
+14. Mini juego
+15. Mensaje final
+
+También puedes abrir el PANEL DE MISIONES para saltar entre secciones.
+
+PERSONALIZA EN script.js:
+- nombre
+- debilidad
+- mensaje secreto
+- cumpleaños
+- fecha de relación
+
+IMPORTANTE:
+
+
+PERSONALIZADA PARA: Pablo Ricardo Muñoz Castillo
